@@ -1,0 +1,105 @@
+<!-- STAT FILTER MENU (Dropdown con checkbox) -->
+<!-- RADAR CHART -->
+<div style="background:black; color:white;">
+  <div *ngIf="(chartData$ | async)?.datasets.length">
+    <div class="stat-filter">
+      <details>
+        <summary><strong>Filtra Statistiche</strong></summary>
+        <div class="card">
+          <div style="margin-bottom: 0.5rem;">
+            <button (click)="selectAllStats(true)">Seleziona Tutto</button>
+            <button (click)="selectAllStats(false)">Deseleziona Tutto</button>
+          </div>
+
+          <div *ngFor="let stat of statKeys$ | async">
+            <label>
+              <input
+                type="checkbox"
+                [checked]="isStatSelected(stat)"
+                (change)="toggleStat(stat, $event.target.checked)"
+              />
+              {{ stat }}
+            </label>
+          </div>
+        </div>
+      </details>
+    </div>
+    <div>
+      <div class="chart-container">
+        <canvas
+          baseChart
+          [data]="chartData$ | async"
+          [options]="chartOptions"
+          type="radar"
+        >
+        </canvas>
+      </div>
+      <div class="chart-container-bar">
+        <button (click)="resetZoom()">Reset Zoom</button>
+        <canvas
+          baseChart
+          [data]="chartData$ | async"
+          [options]="chartOptions"
+          type="bar"
+        >
+        </canvas>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+  <!-- CHAMPION SELECTION LIST -->
+  <div class="stat-filter">
+    <details>
+      <summary><strong>Filtra Campioni</strong></summary>
+      <div>
+        <div style="margin-bottom: 0.5rem;">
+          <button (click)="selectAllChamp(true)">Seleziona Tutto</button>
+          <button (click)="selectAllChamp(false)">Deseleziona Tutto</button>
+        </div>
+
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Cerca..." />
+        </div>
+
+        <div class="tagRow">
+          <div *ngFor="let tag of tags$ | async">
+            <button
+              (click)="toggleTag(tag)"
+              [ngClass]="{
+                'tag-button': true,
+                'tag-selected': selectedTags.has(tag),
+                'tag-unselected': !selectedTags.has(tag)
+              }"
+            >
+              {{ tag }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+  <div class="champion-list">
+    <div class="champion-card" *ngFor="let champ of champions$ | async">
+      <img
+        [src]="
+          'https://ddragon.leagueoflegends.com/cdn/15.9.1/img/champion/' +
+          champ.image.full
+        "
+        [alt]="champ.name"
+        width="64"
+        height="64"
+      />
+      <div>{{ champ.name }}</div>
+      <label>
+        <input
+          type="checkbox"
+          [checked]="isChampionSelected(champ.id)"
+          (change)="toggleChampion(champ.id, $event.target.checked)"
+        />
+        Confronta
+      </label>
+    </div>
+  </div>
+  <div></div>
+</div>

@@ -1,0 +1,108 @@
+.champion-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+  position: relative;
+  z-index: 1;
+}
+.champion-card {
+  text-align: center;
+  width: 100px;
+}
+.chart-container {
+  max-width: 100%;
+  max-height: 90vh;
+  margin: 2rem auto;
+  position: relative;
+  z-index: 1;
+}
+.chart-container-bar {
+  max-width: 100vw;
+  max-height: 90vh;
+  margin: 2rem auto;
+  position: relative;
+  z-index: 1;
+}
+.stat-filter {
+  margin: 1rem 0;
+
+  position: relative; /* z-index requires positioning */
+  z-index: 1000000; /* Higher z-index value */
+}
+details summary {
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 0.5rem;
+}
+.stat-filter {
+  width: 100%;
+  position: relative;
+  z-index: 1000;
+}
+
+.stat-filter details {
+  position: relative;
+}
+
+.stat-filter details[open] > summary + div {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 2000;
+  background-color: #111;
+  padding: 0.5rem;
+  border: 1px solid #444;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+.tag-button {
+  padding: 0.5rem 1rem;
+  margin: 0.25rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tag-selected {
+  background-color: crimson; /* rosso */
+}
+
+.tag-unselected {
+  background-color: steelblue; /* blu */
+}
+.tagRow {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+button {
+  padding: 0.5rem 1rem;
+  margin: 0.25rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+  background-color: steelblue;
+}
+body {
+  font-family: sans-serif;
+  padding: 2rem;
+  background: #f5f5f5;
+}
+
+.search-container {
+  width: 90%;
+}
+
+input[type='text'] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  font-size: 16px;
+}
